@@ -18,6 +18,7 @@ const (
 	signatureAlgorithmSeparator             = ","
 )
 
+// JA4Fingerprint represents the JA4 fingerprint of a TLS Client Hello.
 type JA4Fingerprint struct {
 	//
 	// JA4_a
@@ -44,6 +45,7 @@ type JA4Fingerprint struct {
 	SignatureAlgorithms signatureAlgorithms
 }
 
+// UnmarshalBytes parses a TLS Client Hello record and populates the JA4Fingerprint.
 func (j *JA4Fingerprint) UnmarshalBytes(clientHelloRecord []byte, protocol byte) error {
 	chs := &utls.ClientHelloSpec{}
 	// allowBluntMimicry: true
@@ -55,6 +57,7 @@ func (j *JA4Fingerprint) UnmarshalBytes(clientHelloRecord []byte, protocol byte)
 	return j.Unmarshal(chs, protocol)
 }
 
+// Unmarshal populates the JA4Fingerprint from a utls.ClientHelloSpec.
 func (j *JA4Fingerprint) Unmarshal(chs *utls.ClientHelloSpec, protocol byte) error {
 	var err error
 
@@ -79,6 +82,7 @@ func (j *JA4Fingerprint) Unmarshal(chs *utls.ClientHelloSpec, protocol byte) err
 	return nil
 }
 
+// String returns the JA4 fingerprint string.
 func (j *JA4Fingerprint) String() string {
 	ja4a := fmt.Sprintf(
 		"%s%s%s%s%s%s",

@@ -7,10 +7,12 @@ import (
 	"sort"
 )
 
+// sortUint16 sorts a slice of uint16 in ascending order.
 func sortUint16(sl []uint16) {
 	sort.Slice(sl, func(x int, y int) bool { return sl[x] < sl[y] })
 }
 
+// joinUint16 joins a slice of uint16 into a string with a separator.
 func joinUint16(slice []uint16, sep string) string {
 	var buffer bytes.Buffer
 	for i, u := range slice {
@@ -22,12 +24,14 @@ func joinUint16(slice []uint16, sep string) string {
 	return buffer.String()
 }
 
+// isGREASEUint16 checks if a uint16 is a GREASE value.
 func isGREASEUint16(v uint16) bool {
 	// First byte is same as second byte
 	// and lowest nibble is 0xa
 	return ((v >> 8) == v&0xff) && v&0xf == 0xa
 }
 
+// truncatedSha256 returns the first 12 bytes of the sha256 hash of a string.
 func truncatedSha256(in string) string {
 	sha := sha256.New()
 	sha.Write([]byte(in))

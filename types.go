@@ -6,15 +6,23 @@ import (
 	utls "github.com/refraction-networking/utls"
 )
 
-type (
-	tlsVersion           uint16
-	numberOfCipherSuites int
-	numberOfExtensions   int
+// tlsVersion is the TLS version.
+type tlsVersion uint16
 
-	cipherSuites        []uint16
-	extensions          []uint16
-	signatureAlgorithms []uint16
-)
+// numberOfCipherSuites is the number of cipher suites.
+type numberOfCipherSuites int
+
+// numberOfExtensions is the number of extensions.
+type numberOfExtensions int
+
+// cipherSuites is a slice of cipher suites.
+type cipherSuites []uint16
+
+// extensions is a slice of extensions.
+type extensions []uint16
+
+// signatureAlgorithms is a slice of signature algorithms.
+type signatureAlgorithms []uint16
 
 func (x tlsVersion) String() string {
 	switch uint16(x) {
